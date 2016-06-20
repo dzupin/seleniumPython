@@ -1,6 +1,6 @@
 from selenium import webdriver
 from selenium.webdriver.support.ui import WebDriverWait
-from selenium.webdriver.support import expected_conditions as ExpectedCondition
+from selenium.webdriver.support import expected_conditions
 from selenium.webdriver.common.by import By
 from selenium.webdriver.common.keys import Keys
 
@@ -22,21 +22,25 @@ search_field.submit()
 
 # get the list of elements (html links of results) which are displayed after the search
 # On received Google result page, each result html link is created with "_Rm" class name
-resultStats = WebDriverWait(driver,30).until(ExpectedCondition.presence_of_element_located((By.ID, "resultStats")))
+resultStats = WebDriverWait(driver,30).until(expected_conditions.presence_of_element_located((By.ID, "resultStats")))
 print resultStats.text
-lists = driver.find_elements_by_class_name("_Rm")
+listResultLinks = driver.find_elements_by_class_name("_Rm")
+listResultTitles = driver.find_elements_by_class_name("r")
+listResultDetails = driver.find_elements_by_class_name("st")
 
 # get the number of elements found
-print ("Listing first " + str(len(lists)) + " searches:")
+print ("Listing first " + str(len(listResultLinks)) + " searches:")
 
 # iterate through each element and print the text that is
 # name of the search
-i = 0
-for listitem in lists:
-    print (listitem)
-    i = i + 1
-    if (i > 10):
-        break
+for listitem in listResultLinks:
+    print ("Link: " + listitem.text)
+
+for listitem in listResultTitles:
+      print ("Title: "+ listitem.text)
+
+for listitem in listResultDetails:
+      print ("Details: " + listitem.text)
 
 # close the browser window
 driver.quit()
