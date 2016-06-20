@@ -1,9 +1,13 @@
 from selenium import webdriver
+from selenium.webdriver.support.ui import WebDriverWait
+from selenium.webdriver.support import expected_conditions as ExpectedCcondition
+from selenium.webdriver.common.by import By
 from selenium.webdriver.common.keys import Keys
 
 # create a new Chrome session (R.I.P: starting with version 47 Firefox is no longer supported)
 driver = webdriver.Chrome()
 driver.maximize_window()
+#driver.implicitly_wait(30)
 
 # navigate to Google search page
 driver.get("https://www.google.com")
@@ -18,6 +22,7 @@ search_field.submit()
 
 # get the list of elements (html links of results) which are displayed after the search
 # On received Google result page, each result html link is created with "_Rm" class name
+resultStatistic= WebDriverWait(driver,30).until(ExpectedCcondition.presence_of_element_located((By.ID, "resultStats")))
 lists = driver.find_elements_by_class_name("_Rm")
 
 # get the number of elements found
