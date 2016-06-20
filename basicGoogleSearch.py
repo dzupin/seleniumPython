@@ -1,6 +1,6 @@
 from selenium import webdriver
 from selenium.webdriver.support.ui import WebDriverWait
-from selenium.webdriver.support import expected_conditions as ExpectedCcondition
+from selenium.webdriver.support import expected_conditions as ExpectedCondition
 from selenium.webdriver.common.by import By
 from selenium.webdriver.common.keys import Keys
 
@@ -22,7 +22,7 @@ search_field.submit()
 
 # get the list of elements (html links of results) which are displayed after the search
 # On received Google result page, each result html link is created with "_Rm" class name
-WebDriverWait(driver,30).until(ExpectedCcondition.presence_of_element_located((By.ID, "resultStats")))
+WebDriverWait(driver,30).until(ExpectedCondition.presence_of_element_located((By.ID, "resultStats")))
 lists = driver.find_elements_by_class_name("_Rm")
 
 # get the number of elements found
