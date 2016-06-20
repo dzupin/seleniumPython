@@ -2,7 +2,11 @@ from selenium import webdriver
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions
 from selenium.webdriver.common.by import By
-from selenium.webdriver.common.keys import Keys
+# Set endoding to unicode otherwise you may run into errors like when showing/printing retrieved content from search:
+# UnicodeEncodeError 'ascii' codec can't encode character u'\u2014' in position 34: ordinal not in range(128)
+import sys
+reload(sys)
+sys.setdefaultencoding('utf-8')
 
 # create a new Chrome session (R.I.P: starting with version 47 Firefox is no longer supported)
 driver = webdriver.Chrome()
