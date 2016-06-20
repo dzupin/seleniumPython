@@ -22,11 +22,12 @@ search_field.submit()
 
 # get the list of elements (html links of results) which are displayed after the search
 # On received Google result page, each result html link is created with "_Rm" class name
-WebDriverWait(driver,30).until(ExpectedCondition.presence_of_element_located((By.ID, "resultStats")))
+resultStats = WebDriverWait(driver,30).until(ExpectedCondition.presence_of_element_located((By.ID, "resultStats")))
+print resultStats.text
 lists = driver.find_elements_by_class_name("_Rm")
 
 # get the number of elements found
-print ("Found " + str(len(lists)) + "searches:")
+print ("Listing first " + str(len(lists)) + " searches:")
 
 # iterate through each element and print the text that is
 # name of the search
