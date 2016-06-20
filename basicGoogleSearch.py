@@ -33,14 +33,20 @@ print ("Listing first " + str(len(listResultLinks)) + " searches:")
 
 # iterate through each element and print the text that is
 # name of the search
-for listitem in listResultLinks:
-    print ("Link: " + listitem.text)
+i=0
+for listItem in listResultLinks:
+    i +=1
+    print ("Link number " + str(i) + " : " + listItem.text)
 
-for listitem in listResultTitles:
-      print ("Title: "+ listitem.text)
+i=0
+for listItem in listResultTitles:
+    i += 1
+    print ("Title number " + str(i) + " : "+ listItem.text)
 
-for listitem in listResultDetails:
-      print ("Details: " + listitem.text)
+i=0
+for listItem in listResultDetails:
+    i += 1
+    print ("Details number " + str(i) + " : " + listItem.text)
 
 # close the browser window
 driver.quit()
