@@ -9,7 +9,7 @@ import sys
 reload(sys)
 sys.setdefaultencoding('utf-8')
 
-# create a new Chrome session (R.I.P: starting with version 47 Firefox is no longer supported)
+# create a new Chrome session (Firefox R.I.P: starting with version 47 Firefox is no longer supported)
 driver = webdriver.Chrome()
 driver.maximize_window()
 #driver.implicitly_wait(30)
