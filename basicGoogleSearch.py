@@ -1,13 +1,17 @@
+from importlib import reload
+
 from selenium import webdriver
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions
 from selenium.webdriver.common.by import By
 
-# To fix UnicodeEncodeError 'ascii' codec can't encode character u'\u2014' in position 34: ordinal not in range(128)
-# Default encoding need to be changed. However this is only possible when sys module is reloaded.
+# If Python 2.7 is used then:  UnicodeEncodeError 'ascii' codec can't encode character u'\u2014' in position 34: ordinal not in range(128)
+# Default encoding need to be changed for Python2. However this is only possible when sys module is reloaded.
 import sys
-reload(sys)
-sys.setdefaultencoding('utf-8')
+if sys.version[0] == '2':
+    reload(sys)
+    sys.setdefaultencoding('utf-8')
+########################################################################################################################
 
 # create a new Chrome session (Firefox R.I.P: starting with version 47 Firefox is no longer supported)
 driver = webdriver.Chrome()
@@ -28,7 +32,7 @@ search_field.submit()
 # get the list of elements (html links of results) which are displayed after the search
 # On received Google result page, each result html link is created with "_Rm" class name
 resultStats = WebDriverWait(driver,30).until(expected_conditions.presence_of_element_located((By.ID, "resultStats")))
-print resultStats.text
+print (resultStats.text)
 listResultLinks = driver.find_elements_by_class_name("_Rm")
 listResultTitles = driver.find_elements_by_class_name("r")
 listResultDetails = driver.find_elements_by_class_name("st")
@@ -60,9 +64,9 @@ for listItem in listResultDetails:
     listResultDetailsCollected = listResultDetailsCollected + listItem.text + " "
 
 
-print "All collected Links: " + listResultLinksCollected
-print "All collected Titles: " + listResultTitlesCollected
-print "All collected Details: " + listResultDetailsCollected
+print ("All collected Links: " + listResultLinksCollected)
+print ("All collected Titles: " + listResultTitlesCollected)
+print ("All collected Details: " + listResultDetailsCollected)
 
 # close the browser window
 driver.quit()
