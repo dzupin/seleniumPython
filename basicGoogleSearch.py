@@ -1,11 +1,10 @@
-from importlib import reload
-
 from selenium import webdriver
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions
 from selenium.webdriver.common.by import By
 
-# If Python 2.7 is used then:  UnicodeEncodeError 'ascii' codec can't encode character u'\u2014' in position 34: ordinal not in range(128)
+# If Python 2.7 is used then workaround is needed because there is a bug:
+# UnicodeEncodeError 'ascii' codec can't encode character u'\u2014' in position 34: ordinal not in range(128)
 # Default encoding need to be changed for Python2. However this is only possible when sys module is reloaded.
 import sys
 if sys.version[0] == '2':
